@@ -291,9 +291,15 @@ export class ScheduleReserveCreateComponent {
   //console.log(this.formFinalEventSchedule.event+"event")
   this.reserveService.postSaveEventInSchedule(this.formFinalEventSchedule).subscribe(response=>{
     //aqui me da el evento ya creado, decidir que hacer despues
-    this.recargarComponente()
-    Swal.fire('Exito','El evento y la reserva fueron creados Correctamente','success');
-    console.log(response+"evento creado")
+    console.log(response)
+    if(response.data == null){
+      Swal.fire('Error','No fue posible crear la reserva debido a que no se encontro un profesor con ese ID','error');
+    }else{
+      this.recargarComponente()
+      Swal.fire('Exito','El evento y la reserva fueron creados Correctamente','success');
+      console.log(response+"evento creado")
+    }
+
   })
  }
 
